@@ -1,5 +1,5 @@
 # Importaciones
-from Componente import Componente
+from .Componente import Componente
 
 # Definición de la clase Resistencia
 class Resistencia(Componente):
@@ -12,15 +12,7 @@ class Resistencia(Componente):
     """ 
     def __init__(self, valor, nombre):
         super().__init__(valor, nombre)
-
-    def cambiar_nombre(self, nuevo_nombre):
-        self._nombre = nuevo_nombre
-
-    def cambiar_valor(self, nuevo_valor):
-        self._valor = nuevo_valor
-
+    
+    # Método para entregar una representación de la instancia en str
     def __str__(self):
         return f"Resistencia: {self._nombre} con valor {self._valor}Ω ohms."
-    
-pana_1 = Resistencia(300,"R1")
-print(pana_1)

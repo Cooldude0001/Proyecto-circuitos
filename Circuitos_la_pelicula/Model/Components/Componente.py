@@ -12,8 +12,20 @@ class Componente:
         self._valor = valor
         self._nombre = nombre
 
+    # Métodos para cambiar atributos de la instancia
     def cambiar_valor(self, nuevo_valor: float):
-        pass
+        """Funcion que cambia el atributo valor por un str cualquiera."""
+        self.valor = nuevo_valor
 
     def cambiar_nombre(self, nuevo_nombre: str):
-        pass
+        """Funcion que cambia el atributo nombre por un str cualquiera."""
+        self._nombre = nuevo_nombre
+
+    # Métodos para obtener atributos
+    def obtener_valor(self):
+        """Funcion que retorna el valor de la instancia."""
+        return self._valor
+    
+    def obtener_nombre(self):
+        """Funcion que retorna el nombre de la instancia."""
+        return self._nombre

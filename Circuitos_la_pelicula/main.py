@@ -9,3 +9,9 @@ if __name__ == "__main__":
     pana_2 = Inductor(650, "H1")
     pana_3 = Capacitor(100, "C1")
     pana_4 = Fuente(5, "Fuente", "DC")
+    
+    
+    pana_1.cambiar_valor(15)
+    print(f" valor de {pana_1._nombre} cambiado a: {pana_1._valor}")
+    
+    # Funciona :]
