@@ -2,7 +2,7 @@
 Para reflejar los aprendizajes adquiridos durante el curso de POO, se nos ha encargado la realización de un proyecto final, nuestro grupo **_Eli y sus testigos_** ha escogido de entre las alternativas propuestas la alternativa número 4.
 
 ## Definicion de alternativa
-La alterativa número 4 tiene como objetivo desarrollar una aplicación en Python que permita simular circuitos RC, RL, RLC simples.
+La alterativa número cuatro tiene como objetivo desarrollar una aplicación en Python que permita simular circuitos RC, RL, RLC simples.
 
 Las condiciones principales de esta alternativa son las siguientes:
  + Código original
@@ -55,23 +55,37 @@ class Circuito {
 }
 ```
 ## Solución preliminar
-Para el desarrollo de la alternativa se propuso el patron de aquitectura MVC con el uso de clases separadas por paquetes.
+Para el desarrollo de la alternativa se propuso organizar el desarrollo en las siguientes fases:
+
++ Creación del diagrama de clases
++ Implementación del código en Python
++ Testeo de la implementación
++ Creación de la GUI
++ Implementación del código en Python de la simulación
++ Pruebas del programa
+
+Además de esto se planteo el uso de un patron de aquitectura MVC (Model - Vista - Controller) con el uso de clases separadas por paquetes.
+
 ```bash
-└── Circuitos_la_pelicula
-    └── Controller
+└── Circuitos_la_pelicula # Directorio principal del proyecto
+    └── Controller # Paquete que contiene el controlador del programa
        ├── __init__.py
-    └── Model
-       └── Circuit
-       ├── __init__.py
-       ├── Circuito.py
-       └── Components
-       ├── __init__.py
-       ├── Componente.py
-       ├── Condensador.py
-       ├── Fuente.py
-       ├── Inductor.py
-       ├── Resistencia.py
-    └── GUI
-       ├── __init__.py
-├── main.py
+       ├── controller.py # Modulo que contiene el código del controlador
+
+    └── Model # Paquete que contiene el modelo del programa
+           └── Circuit # Paquete que contiene el archivo de la clase Circuito
+           ├── __init__.py
+           ├── Circuito.py # Modulo que contiene la clase Circuito
+           └── Components # Paquete que contiene los archivos que corresponden a los componenetes del circuito
+           ├── __init__.py 
+           ├── Componente.py # Modulo que contiene la clase Componente
+           ├── Condensador.py # Modulo aue contiene la clase Capacitor
+           ├── Fuente.py # Modulo que contiene la clase Fuente
+           ├── Inductor.py # Modulo que contiene la clase Inductor
+           ├── Resistencia.py # Modulo que contiene la clase Resistencia
+
+     └── GUI # Paquete que contiene la vista del progarma
+            ├── __init__.py
+            ├── vista.py # Archivo que contiene la interfaz gráfica de usuario
+├── main.py # Archivo desde el que se va a ejecutar el programa
 ```
