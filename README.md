@@ -12,23 +12,22 @@ Las condiciones principales de esta alternativa son las siguientes:
  + El resultado de la simulación deben ser las gráficas de tensión/corriente en cada uno de los componentes 
  + Se pueden utilizar módulos externos para la solución de los componentes númericos
 
-Como caracteristica extra la alternativa propone hacer analisis en el dominio AC.
+Como caracteristica extra la alternativa propone hacer analisis en el dominio AC, sin embargo no se implemento en la solución por inconvenientes de tiempo.
 
 ## Diagrama de clase
 Las clases propuestas para el desarrollo de la alternativa son las siguientes:
 ```mermaid
 classDiagram
 Componente --* Circuito
+Fuente --* Circuito
 
 Inductor --|> Componente
 Resistencia --|> Componente
 Capacitor --|> Componente
-Fuente --|> Componente
 
 class Componente {
     __init__ : self
-    Valor : None
-    Nombre : str
+    Valor : float
 }
 
 class Resistencia {
@@ -45,47 +44,66 @@ class Capacitor {
 
 class Fuente {
     __init__ : self
-    Tipo de voltaje : float
-    Valor de tension : str
+    Voltaje : float
 }
 
 class Circuito {
-    __init __ : self
+    __init__(self, tipo, configuracion, fuente, componentes)
     Componenetes : list = [Componente]
+
+    calcular_respuesta(self, tiempo)
 }
 ```
-## Solución preliminar
-Para el desarrollo de la alternativa se propuso organizar el desarrollo en las siguientes fases:
+## Definición de la solución
+Para el desarrollo de la alternativa se propuso organizar el código utilizando paquetes, utilizando el patron de aquitectura MVC (Model - Vista - Controller) con el uso de clases separadas por paquetes.
 
-+ Creación del diagrama de clases
-+ Implementación del código en Python
-+ Testeo de la implementación
-+ Creación de la GUI
-+ Implementación del código en Python de la simulación
-+ Pruebas del programa
-
-Además de esto se planteo el uso de un patron de aquitectura MVC (Model - Vista - Controller) con el uso de clases separadas por paquetes.
+La estructura de paquetes popuesta para el desarrollo de la solución es la siguiente:
 
 ```bash
-└── Circuitos_la_pelicula # Directorio principal del proyecto
-    └── Controller # Paquete que contiene el controlador del programa
-       ├── __init__.py
-       ├── controller.py # Modulo que contiene el código del controlador
-
-    └── Model # Paquete que contiene el modelo del programa
-           └── Circuit # Paquete que contiene el archivo de la clase Circuito
-           ├── __init__.py
-           ├── Circuito.py # Modulo que contiene la clase Circuito
-           └── Components # Paquete que contiene los archivos que corresponden a los componenetes del circuito
-           ├── __init__.py 
-           ├── Componente.py # Modulo que contiene la clase Componente
-           ├── Condensador.py # Modulo aue contiene la clase Capacitor
-           ├── Fuente.py # Modulo que contiene la clase Fuente
-           ├── Inductor.py # Modulo que contiene la clase Inductor
-           ├── Resistencia.py # Modulo que contiene la clase Resistencia
-
-     └── GUI # Paquete que contiene la vista del progarma
-            ├── __init__.py
-            ├── vista.py # Archivo que contiene la interfaz gráfica de usuario
-├── main.py # Archivo desde el que se va a ejecutar el programa
+simulador_circuitos/ # Directorio principal del proyecto
+│
+├── controladores/ # Paquete que contiene el controlador del programa
+│   └── controlador_circuito.py # Modulo que contiene el código del controlador
+│
+├── modelos/ # Paquete que contiene el modelo del programa
+│   ├── componente.py # Modulo que contiene las clases Componente, Inductancia, Capacitancia y Resistencia
+│   ├── fuente.py # Modulo que contiene la clase Fuente
+│   └── circuito.py  # Paquete que contiene el archivo de la clase Circuito
+│
+├── vistas/ # Paquete que contiene la vista del progarma
+│   ├── vista_circuito.py # Modulo que contiene la interfaz gráfica de usuario
+│   ├── vista_grafica.py # Modulo que contiene el código que permite graficar las graficas de
+|                          tensión/corriente
+│   └── imagenes/  # Carpeta que contiene las imágenes del proyecto
+│       ├── RC_serie.png
+│       ├── RC_paralelo.png
+│       ├── RL_serie.png
+│       ├── RL_paralelo.png
+│       ├── RLC_serie.png
+│       └── RLC_paralelo.png
+│
+└── main.py # Archivo desde el que se va a ejecutar el programa
 ```
+Para el desarrollo de la solucion se utilizaron las siguientes librerias:
+- Tkinter
+
+Esta libreria se utilizo para diseñar la GUI del programa utilizando la libreria `ttk` de Tkinter ya que brinda un mayor control entre el comportamiento de un widget y el código que implementa su apariencia, además de mejoras visuales en el estilo de los widgets con respecto a `tk`.
+
+- Numpy
+
+La libreria se incluyo dentro del proyecto para realizar cálculos numéricos dentro de la clase `Circuito` y generar el intervalo de tiempo a simular.
+ 
+- Matplotlib
+
+Matplotlib se utilizo para generar las graficas de tensión/corriente para cada uno de los circuitos (RL, RC y RLC), teniendo en cuenta si el circuito a simular esta en serie o paralelo
+que se entregan como resultado de la simulación.
+
+- OS
+
+La libreria `OS`se utilizo para gestionar de mejor manera la carga de imagenes dentro el programa y evitar errores al acceder a rutas de las imagenes ejecutando el programa
+desde otros equipos.
+
+- PIL
+
+PIL o pillow es una libreria que brinda soporte para abrir, manipular y guardar muchos formatos de archivo de imagen diferentes, en el caso de nuestro proyecto se utilizo debido a
+que las imagenes utilizan transparencia por lo que la libreria permite gestionar de mejor manera su comportamiento.
