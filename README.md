@@ -107,3 +107,9 @@ desde otros equipos.
 
 PIL o pillow es una libreria que brinda soporte para abrir, manipular y guardar muchos formatos de archivo de imagen diferentes, en el caso de nuestro proyecto se utilizo debido a
 que las imagenes utilizan transparencia por lo que la libreria permite gestionar de mejor manera su comportamiento.
+
+## Ejemplo de uso del simulador
+Al ingresar al simulador se abre una interfaz con las entradas corespondientes a los datos de los componentes que integran el circuito a simular junto con el tiempo de simulación y las configuraciones del circuito, luego de llenar las entradas con los datos y se presione el boton de graficar se devolvera como resultado la grafica de tension/corriende de cada componenete, el uso del programa se encuentra ilustrado en el siguiente video.
+
+https://github.com/user-attachments/assets/768b299d-d88e-4af9-a102-26a02048b199
+
